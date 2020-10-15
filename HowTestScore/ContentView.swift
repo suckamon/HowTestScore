@@ -36,16 +36,24 @@ struct ContentView: View {
             message = "何も入力されていません！"
             return
         } else {
-            let inputScoreInt = Int(inputScore)!
-            if inputScoreInt == score {
-                message = "正解！\(counter)回目で当たりました！"
-            } else if inputScoreInt > score {
-                message = "惜しい！もっと低かった"
-                counter += 1
-            } else if inputScoreInt < score {
-                message = "惜しい！もっと高かった"
-                counter += 1
+            if let inputScoreInt = Int(inputScore) {
+                if inputScoreInt > 100 {
+                    message = "100以下の値を入力してください"
+                } else if inputScoreInt < 0 {
+                    message = "0以上の値を入力してください"
+                } else if inputScoreInt == score {
+                    message = "正解！\(counter)回目で当たりました！"
+                } else if inputScoreInt > score {
+                    message = "惜しい！もっと低かった"
+                    counter += 1
+                } else if inputScoreInt < score {
+                    message = "惜しい！もっと高かった"
+                    counter += 1
+                }
+            } else {
+                message = "0から100の整数を入力してください"
             }
+            
         }
     }
     
